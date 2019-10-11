@@ -47,7 +47,7 @@ function runApp() {
         res[i].product_sales,
         res[i].department_name,
         res[i].price,
-        res[i].stock_qauntity
+        res[i].stock_quantity
       ]);
     }
     // displaying the table in node
@@ -85,15 +85,15 @@ function update(product, amount) {
   var query = "SELECT * FROM products WHERE ?";
   connection.query(query, { item_id: product }, function(err, res) {
     if (err) throw err;
-    if (amount <= res[0].stock_qauntity);
+    if (amount <= res[0].stock_quantity);
     var cost = res[0].price * amount;
-    console.log(res[0].stock_qauntity);
+    // console.log(res[0].stock_quantity);
     console.log(
       `I cant believe you just bought ${amount} ${res[0].product_name} for $${cost}! You're out of your mind!`
     );
-    var newAmount = (res[0].stock_qauntity -= amount);
+    var newAmount = (res[0].stock_quantity -= amount);
     connection.query("UPDATE products SET ? WHERE ?", [
-      { stock_qauntity: newAmount },
+      { stock_quantity: newAmount },
       { item_id: product },
       function(err, res) {
         if (err) throw err;
